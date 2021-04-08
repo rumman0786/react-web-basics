@@ -11,7 +11,8 @@ class Blog extends Component {
 
     state = {
         posts: [],
-        selectedPostId: null
+        selectedPostId: null,
+        requestError: false
     };
 
     componentDidMount(){
@@ -28,6 +29,9 @@ class Blog extends Component {
             );
 
             this.setState({posts: updatedPosts});
+        })
+        .catch(error => {
+            this.setState({requestError: true});
         });
     }
 
@@ -37,13 +41,17 @@ class Blog extends Component {
 
     render () {
 
-        const posts = this.state.posts.map(
-            post => <Post key={post.id}
-                          author={post.author}
-                          title={post.title}
-                          clicked={() => this.selectedPostHandler(post.id)}/>
-        );
-
+        let posts = <h1>Something went Wrong!!!</h1>
+        
+        if(!this.state.error) {
+            posts = this.state.posts.map(
+                post => <Post key={post.id}
+                              author={post.author}
+                              title={post.title}
+                              clicked={() => this.selectedPostHandler(post.id)}/>
+            );    
+        }
+        
         return (
             <div>
                 <section className="Posts">
