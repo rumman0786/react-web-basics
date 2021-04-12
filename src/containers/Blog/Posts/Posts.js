@@ -12,6 +12,9 @@ class Posts extends Component {
     };
 
     componentDidMount(){
+        
+        console.log(this.props);
+
         axiosInstance.get("/posts")
         .then((response) => {
             const serverPosts = response.data.splice(0,4);

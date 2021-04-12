@@ -10,6 +10,10 @@ class NewPost extends Component {
         author: 'Max'
     }
 
+    componentDidMount() {
+        console.log(this.props);
+    }
+
     handleBlogPostSubmit = () => {
         const blogPost = {
             title: this.state.title,
