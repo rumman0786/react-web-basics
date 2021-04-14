@@ -22,14 +22,11 @@ class Blog extends Component {
                                         activeStyle={{color: 'orange', textDecoration: 'underline'}} 
                                         exact>Posts</NavLink></li>
                             
-                            {this.state.auth
-                                ? <li><NavLink to={{
+                            <li><NavLink to={{
                                     pathname:"/new-post",
                                     search:"?fast-preview=true",
                                     hash:"#jumpToAnchor"
                                 }}>New Post</NavLink></li>
-                                : null
-                            }
                         </ul>
                     </nav>
                 </header>
@@ -37,7 +34,10 @@ class Blog extends Component {
                 <Switch>
                     {this.state.auth ? <Route path="/new-post" component={NewPost}/> : null}
                     <Route path="/post" component={Posts}/>
-                    <Redirect from="/" to="/post"/>
+                    <Route component={() => <h1>Error 404 Not Found</h1>}/>
+
+                    {/* the redirect will be applied to anything that didnt match previously */}
+                    {/* <Redirect from="/" to="/post"/> */}
                     {/* <Route path="/" component={Posts}/> */}
                 </Switch>
             </div>
